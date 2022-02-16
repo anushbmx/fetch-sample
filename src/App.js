@@ -1,60 +1,22 @@
-import React, {Component} from 'react';
-import {Navbar, Container} from 'react-bootstrap';
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from 'react-router-dom';
+import Index from './containers';
+import InitialLoad from './containers/InitialLoad';
+import OnFocusLoad from './containers/OnFocusLoad';
+import OnRequestLoad from './containers/OnRequestLoad';
 
-
-class App extends Component {
-
-  componentDidMount = () => {
-    this.fetchInitData();
-  };
-
-  fetchInitData = () => {
-    const baseUrl = 'https://swapi.dev/api';
-    const {page} = this.state;
-    fetch(`${baseUrl}/people/${page}`, {
-        method: 'get'
-      })
-      .then(()=>{
-
-      })
-      .catch(()=>{
-
-      })
-  }
-
-  render = () => {
-    return (
-      <div className='container'>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">
-          React Bootstrap
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
-
-      <div className='row'>
-        <div className='col-12'>
-        <h1>List</h1>
-        </div>
-      </div>
-    </div>
-    )
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      page: 1,
-      loading: true,
-      data: [],
-    };
-  }
-
+export default function AppContainer () {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="" element={<Index />} />
+        <Route path="initial-load" element={<InitialLoad />} />
+        <Route path="on-focus-load" element={<OnFocusLoad />} />
+        <Route path="on-request-load" element={<OnRequestLoad />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App;
